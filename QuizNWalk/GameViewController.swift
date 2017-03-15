@@ -10,18 +10,20 @@ import UIKit
 import GameplayKit
 import MapKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     var playerName : String?
-    var quizName : String?
-    var currentGame : Game?
+    var currentGame : Game!
     var timer = Timer()
     var time = 10
+    var allLoctions : [CLLocationCoordinate2D] = []
     
     var locationManager : CLLocationManager!
     
     // Map View
-    @IBOutlet weak var mapView: UIView!
+    
+    @IBOutlet weak var walkView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var quizNameLabel: UILabel!
     @IBOutlet weak var currentQuestion: UILabel!
     @IBOutlet weak var getQuestionButton: UIButton!
@@ -44,6 +46,13 @@ class GameViewController: UIViewController {
         questionView.isHidden = true
         quizNameLabel.text = currentGame?.quizName
         locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.distanceFilter = 10
+        locationManager.desiredAccuracy = 10
+        locationManager.startUpdatingLocation()
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        showQuestionAnnotations()
         ///////////
     }
 
@@ -115,10 +124,10 @@ class GameViewController: UIViewController {
     
     func switchView(){
         if questionView.isHidden{
-            mapView.isHidden = true
+            walkView.isHidden = true
             questionView.isHidden = false
         } else {
-            mapView.isHidden = false
+            walkView.isHidden = false
             questionView.isHidden = true
         }
     }
@@ -145,14 +154,60 @@ class GameViewController: UIViewController {
         answer4Button.isEnabled = false
     }
     
+    //Map functions below
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last{
+            let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
+            let lookHereRegion = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.setRegion(lookHereRegion, animated: true)
+        }
+    }
     
-    // MARK: - Navigation
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        /// Hej
+    }
+    
+    func showQuestionAnnotations(){
+        for (i, question) in currentGame.questions .enumerated(){
+            print( "\(i)")
+            let annotation = customMKannotation(id: 1.0 + Float(i)/10)
+            annotation.title = "Question nr: \(i+1)"
+            annotation.coordinate = CLLocationCoordinate2D(latitude: question.coordinates.x,
+                                                           longitude: question.coordinates.y)
+            allLoctions.append(annotation.coordinate)
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "question")
+            mapView.addAnnotation(annotationView.annotation!)
+        }
+        let polyLine = MKPolyline(coordinates: allLoctions, count: allLoctions.count)
+        mapView.add(polyLine)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "question"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+        } else {
+            annotationView?.annotation = annotation
+        }
+        annotationView?.image = #imageLiteral(resourceName: "quizAnnotationImage")
+        return annotationView
+  }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKPolyline{
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 5
+            return renderer
+        }
+        return MKPolylineRenderer()
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueSender = segue.destination as! HighscoreViewController
-        segueSender.quizName = quizName
+        segueSender.quizName = currentGame.quizName
         segueSender.correctAnswers = currentGame!.correctAnswers
     }
     

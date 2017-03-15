@@ -43,24 +43,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a quiz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elc-vE-gUh">
-                                <rect key="frame" x="42" y="509" width="317" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Questions:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycd-bM-lGd">
-                                <rect key="frame" x="42" y="538" width="136" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Length:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="por-Oh-sFe">
-                                <rect key="frame" x="186" y="538" width="173" height="21"/>
+                                <rect key="frame" x="16" y="499" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -81,6 +65,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Length:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="por-Oh-sFe">
+                                <rect key="frame" x="16" y="528" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.82557148950000003" green="1" blue="0.92776059960000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -89,7 +81,6 @@
                         <outlet property="mapView" destination="Smq-JY-CHt" id="VuK-Kh-YyW"/>
                         <outlet property="nameInput" destination="hqe-sH-0DI" id="ytJ-4S-5yH"/>
                         <outlet property="questionsLabel" destination="ycd-bM-lGd" id="QER-mT-1hK"/>
-                        <outlet property="quizNameLabel" destination="elc-vE-gUh" id="WoF-ON-hV7"/>
                         <segue destination="JKn-21-emD" kind="show" identifier="segueToGame" id="Pxd-oJ-JHW"/>
                     </connections>
                 </viewController>
@@ -221,11 +212,12 @@
                         <outlet property="answer4Button" destination="BNq-kn-ODa" id="OQ3-nl-6tC"/>
                         <outlet property="currentQuestion" destination="Mu9-wU-woU" id="TWy-k4-ob5"/>
                         <outlet property="getQuestionButton" destination="KVV-vU-ldr" id="42U-kG-Led"/>
-                        <outlet property="mapView" destination="0fp-2E-DJh" id="vxO-Tc-eJx"/>
+                        <outlet property="mapView" destination="dCz-rr-z2g" id="avr-xD-g2I"/>
                         <outlet property="questionLabel" destination="UEa-CM-MLg" id="qwA-vT-oN1"/>
                         <outlet property="questionView" destination="a2v-30-XKB" id="tVM-AP-qz9"/>
                         <outlet property="quizNameLabel" destination="aKR-tU-6G1" id="Ps5-p1-iwC"/>
                         <outlet property="timerLabel" destination="r4e-9Z-Lmx" id="kjO-3A-c7h"/>
+                        <outlet property="walkView" destination="0fp-2E-DJh" id="ITx-OV-QeT"/>
                         <segue destination="QTB-ow-8kl" kind="show" identifier="fromQuestionToHighscore" id="AOE-yN-OGJ"/>
                     </connections>
                 </viewController>

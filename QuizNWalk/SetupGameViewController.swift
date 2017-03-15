@@ -9,10 +9,10 @@
 import UIKit
 import MapKit
 
+
 class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var nameInput: UITextField!
-    @IBOutlet weak var quizNameLabel: UILabel!
     @IBOutlet weak var questionsLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
@@ -78,20 +78,22 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if let selectedAnnotation = view.annotation as? customMKannotation{
             selectedGame = allGames?.first{($0.id == selectedAnnotation.id)}
-            quizNameLabel.text = selectedGame?.quizName
             questionsLabel.text = "Questions: \(selectedGame!.questions.count)"
             var totalDistance : Double = 0
             for index in 0...selectedGame!.questions.count - 2{
                 let startLocation = CLLocation(latitude: (selectedGame?.questions[index].coordinates.x)!, longitude: (selectedGame?.questions[index].coordinates.y)!)
                 let toLocation = CLLocation(latitude: (selectedGame?.questions[index + 1].coordinates.x)!, longitude: (selectedGame?.questions[index + 1].coordinates.y)!)
                 totalDistance += toLocation.distance(from: startLocation)
+                print(totalDistance)
             }
-            lengthLabel.text = "Distance: \(totalDistance)m"
+            totalDistance = totalDistance/1000
+            let roundedDistance = String(format: "%.2f", totalDistance)
+            lengthLabel.text = "Total distance: \(roundedDistance)km"
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        quizNameLabel.text = "Pick a quiz"
+        
         questionsLabel.text = "Questions:"
         lengthLabel.text = "Distance"
         selectedGame = nil
@@ -120,8 +122,8 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
 }
 
 class customMKannotation: MKPointAnnotation{
-    let id : Int
-    init(id: Int){
+    let id : Float
+    init(id: Float){
         self.id = id
     }
     
