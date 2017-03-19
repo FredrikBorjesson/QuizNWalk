@@ -20,9 +20,9 @@ func getGames() -> [Game]{
     demoGame.questions.append(Question("Vad betyder order demokrati?", "Folkstyre", "Rättvisa", "Folkbildning", "Orättvisa", (35.702069100000003, 139.77532690000001)))
     demoGame.questions.append(Question("Vad heter Nordkoreas nuvarande ledare?", "Kim Jong-un", "Tim Long Li", "Kim Peng", "Slim Shady", (-33.863399999999999, 151.21100000000001)))
     demoGame.questions.append(Question("Vem var formgivaren bakom den klassiska fåtöljen Ägget?", "Arne Jacobsen", "Marcello Siard", "Lena Larsson", "Carl Malmsten", (22.284680999999999, 114.15817699999999)))
-    demoGame.questions.append(Question("Hur långt var fartyget Titanic?", "269m", "294m", "189m", "235m", (22.284680999999999, 114.15817699999999)))
-    demoGame.questions.append(Question("Vilken släkt kom Gustav Vasas mamma ifrån?", "Eka", "Sture", "Gren", "Sparre", (21.282777800000002, -157.8294444)))
-    demoGame.questions.append(Question("Vilket år tillträde John F Kennedy som USAs president?", "1961", "1964", "1960", "1949", (37.787358900000001, -122.408227)))
+    demoGame.questions.append(Question("Hur långt var fartyget Titanic?", "269m", "294m", "189m", "235m", (21.282777800000002, -157.8294444)))
+    demoGame.questions.append(Question("Vilken släkt kom Gustav Vasas mamma ifrån?", "Eka", "Sture", "Gren", "Sparre", (37.787358900000001, -122.408227)))
+    demoGame.questions.append(Question("Vilket år tillträde John F Kennedy som USAs president?", "1961", "1964", "1960", "1949", (19.435477800000001, -99.1364789)))
     let gameArray = [demoGame]
     return gameArray
 }

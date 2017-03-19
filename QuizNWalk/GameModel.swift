@@ -11,14 +11,17 @@ import Foundation
 class Game{
     
     let quizName : String
-    let id : Float
+    let id : Int
     var questions : [Question] = []
-    var currentQuestion : Question?
+    var currentQuestion: Question {
+        get {return questions[questionNr - 1]}
+    }
     var questionNr = 1
     var correctAnswers = 0
+    var length : String = ""
     
     
-    init(quizName: String, id: Float) {
+    init(quizName: String, id: Int) {
         self.quizName = quizName
         self.id = id
     }

@@ -8,17 +8,30 @@
 
 import UIKit
 import MapKit
+import UserNotifications
 
 class MenuViewController: UIViewController, CLLocationManagerDelegate{
 
     var locationManager : CLLocationManager!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var highscoreButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: {didAllow, erroe in
+            print("could not allow notifications")
+        })
+        
+        playButton.layer.cornerRadius = 6
+        highscoreButton.layer.cornerRadius = 6
+        aboutButton.layer.cornerRadius = 6
         
         // Do any additional setup after loading the view.
     }
@@ -37,7 +50,7 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
                 } else if sender.currentTitle == "HighScore"{
                     performSegue(withIdentifier: "segueToHighscore", sender: self)
                 } else {
-                    performSegue(withIdentifier: "segueToAbout", sender: self)
+                    performSegue(withIdentifier: "a", sender: self)
                 }
             }
         }

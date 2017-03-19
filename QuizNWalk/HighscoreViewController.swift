@@ -8,23 +8,27 @@
 
 import UIKit
 
-class HighscoreViewController: UIViewController {
+class HighscoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var quizName : String?
-    var correctAnswers: Int?
+    var higscoreList : [[Any]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        higscoreList.sort{$0[1] as! Int > $1[1] as! Int}
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return higscoreList.count
     }
     
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        let player = higscoreList[indexPath.row]
+        cell.textLabel?.text = "Name: \(player[0]) Correct answers: \(player[1]) "
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 

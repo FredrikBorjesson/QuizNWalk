@@ -9,6 +9,7 @@
 import UIKit
 import GameplayKit
 import MapKit
+import UserNotifications
 
 class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
@@ -17,7 +18,9 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     var timer = Timer()
     var time = 10
     var allLoctions : [CLLocationCoordinate2D] = []
-    
+    var allAnnotations : [MKAnnotation] = []
+    var inRegion = true
+    var currentRegion : CLCircularRegion!
     var locationManager : CLLocationManager!
     
     // Map View
@@ -50,15 +53,23 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         locationManager.distanceFilter = 10
         locationManager.desiredAccuracy = 10
         locationManager.startUpdatingLocation()
+        
+        answer1Button.layer.cornerRadius = 6
+        answer2Button.layer.cornerRadius = 6
+        answer3Button.layer.cornerRadius = 6
+        answer4Button.layer.cornerRadius = 6
+        getQuestionButton.layer.cornerRadius = 6
+        questionLabel.layer.cornerRadius = 6
         mapView.delegate = self
         mapView.showsUserLocation = true
+        
+        getQuestionButtonShow()
         showQuestionAnnotations()
-        ///////////
+        stopMonitoringRegions()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.refre
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
@@ -70,23 +81,32 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         } else {
             sender.backgroundColor = UIColor.red
         }
-        if currentGame!.questionNr == 10{
-             performSegue(withIdentifier: "fromQuestionToHighscore", sender: self)
-        }
         updateCurrentQuestion()
+        if currentGame!.questionNr == currentGame.questions.count - 1{
+            stopMonitoringRegions()
+             performSegue(withIdentifier: "fromQuestionToEndGame", sender: self)
+        }
         disableButtons()
+        getQuestionButtonHide()
+        startMontitoringQuestion()
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(switchView), userInfo: nil, repeats: false)
-    }
-    
-    
-    @IBAction func onGetQuestionButton(_ sender: Any) {
-        enableButtons()
-        setQuestionAndAnswers()
-        switchView()
-        time = 10
-        startTimer()
+        inRegion = false
+        print(currentGame.questionNr)
         
     }
+    
+    @IBAction func onGetQuestionButton(_ sender: Any) {
+        print("GetQuestion is pressed")
+        if inRegion{
+            enableButtons()
+            setQuestionAndAnswers()
+            switchView()
+            time = 10
+            startTimer()
+        }
+    }
+    
+    
     
     func setQuestionAndAnswers(){
         questionLabel.text = currentGame!.questions[currentGame!.questionNr - 1].question
@@ -102,6 +122,11 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     }
     
     func updateCurrentQuestion(){
+        let annotation = allAnnotations[currentGame.questionNr - 1]
+        mapView.removeAnnotation(annotation)
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        mapView.addAnnotation(annotationView.annotation!)
+        print("\(mapView.annotations.count) antal annotations efter remove")
         currentGame!.questionNr += 1
         currentQuestion.text = "Question: \(currentGame!.questionNr)/\(currentGame!.questions.count)"
         
@@ -131,20 +156,17 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             questionView.isHidden = true
         }
     }
-    
-    func noMoreQuestions(){
-        performSegue(withIdentifier: "fromQuestionToHighscore", sender: self)
-    }
+ 
     
     func enableButtons(){
         answer1Button.isEnabled = true
         answer2Button.isEnabled = true
         answer3Button.isEnabled = true
         answer4Button.isEnabled = true
-        answer1Button.backgroundColor = UIColor.gray
-        answer2Button.backgroundColor = UIColor.gray
-        answer3Button.backgroundColor = UIColor.gray
-        answer4Button.backgroundColor = UIColor.gray
+        answer1Button.backgroundColor = UIColor.white
+        answer2Button.backgroundColor = UIColor.white
+        answer3Button.backgroundColor = UIColor.white
+        answer4Button.backgroundColor = UIColor.white
     }
     
     func disableButtons(){
@@ -154,61 +176,114 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         answer4Button.isEnabled = false
     }
     
+    func getQuestionButtonShow(){
+        getQuestionButton.backgroundColor = UIColor.white
+        getQuestionButton.alpha = 1.0
+    }
+    
+    func getQuestionButtonHide(){
+        getQuestionButton.backgroundColor = UIColor.lightGray
+        getQuestionButton.alpha = 0.5
+    }
+    
     //Map functions below
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last{
             let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
             let lookHereRegion = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.setRegion(lookHereRegion, animated: true)
+            mapView.setRegion(lookHereRegion, animated: false)
+        }
+    }
+    
+    func startMontitoringQuestion(){
+        stopMonitoringRegions()
+        print("\(locationManager.monitoredRegions.count) i startMonitoring 1")
+        let newLocation = allLoctions[currentGame.questionNr - 1]
+        currentRegion = CLCircularRegion(center: newLocation, radius: 10, identifier: "questionFence")
+        print(currentRegion)
+        locationManager.startMonitoring(for: currentRegion)
+        print("\(locationManager.monitoredRegions.count) i startMonitoring 2")
+    }
+    
+    func stopMonitoringRegions(){
+        for region in locationManager.monitoredRegions{
+            locationManager.stopMonitoring(for: region)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        /// Hej
+        print(locationManager.monitoredRegions.count)
+        displayNotification()
+        getQuestionButtonShow()
+        inRegion = true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        getQuestionButtonHide()
+        inRegion = false
     }
     
     func showQuestionAnnotations(){
         for (i, question) in currentGame.questions .enumerated(){
-            print( "\(i)")
-            let annotation = customMKannotation(id: 1.0 + Float(i)/10)
+            
+            let annotation = customMKannotation(id: i + 1)
             annotation.title = "Question nr: \(i+1)"
             annotation.coordinate = CLLocationCoordinate2D(latitude: question.coordinates.x,
                                                            longitude: question.coordinates.y)
             allLoctions.append(annotation.coordinate)
-            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "question")
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            allAnnotations.append(annotationView.annotation!)
             mapView.addAnnotation(annotationView.annotation!)
         }
+        
         let polyLine = MKPolyline(coordinates: allLoctions, count: allLoctions.count)
         mapView.add(polyLine)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "question"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-        } else {
-            annotationView?.annotation = annotation
+       
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        annotationView.canShowCallout = true
+        annotationView.annotation = annotation
+        if let annotation = annotation as? customMKannotation{
+            if annotation.id < currentGame.questionNr{
+                annotationView.image = #imageLiteral(resourceName: "questionGray")
+            } else {
+                annotationView.image = #imageLiteral(resourceName: "questionGreen")
+            }
         }
-        annotationView?.image = #imageLiteral(resourceName: "quizAnnotationImage")
+        
         return annotationView
   }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = UIColor.blue
-            renderer.lineWidth = 5
+            renderer.lineWidth = 3
             return renderer
         }
         return MKPolylineRenderer()
     }
+    
+    // Notification funtions
+    
+    func displayNotification(){
+        let content = UNMutableNotificationContent()
+        content.title = "You're at the question!"
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: "notificationRequest", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let segueSender = segue.destination as! HighscoreViewController
-        segueSender.quizName = currentGame.quizName
-        segueSender.correctAnswers = currentGame!.correctAnswers
+        let segueSender = segue.destination as! EndGameViewController
+            segueSender.currentGame = currentGame
+            segueSender.playerName = playerName
+    
     }
     
 

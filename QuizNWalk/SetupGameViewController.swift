@@ -16,6 +16,7 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     @IBOutlet weak var questionsLabel: UILabel!
     @IBOutlet weak var lengthLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startButton: UIButton!
     
     var locationManager : CLLocationManager!
     var allGames : [Game]?
@@ -33,6 +34,7 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
         mapView.showsUserLocation = true
         allGames = getGames()
         showGamesAnnotations()
+        startButton.layer.cornerRadius = 6
         // Do any additional setup after loading the view.
     }
 
@@ -71,7 +73,7 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
         } else {
             annotationView?.annotation = annotation
         }
-        annotationView?.image = #imageLiteral(resourceName: "quizAnnotationImage")
+        annotationView?.image = #imageLiteral(resourceName: "chooseQuiz")
         return annotationView
     }
     
@@ -84,10 +86,10 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
                 let startLocation = CLLocation(latitude: (selectedGame?.questions[index].coordinates.x)!, longitude: (selectedGame?.questions[index].coordinates.y)!)
                 let toLocation = CLLocation(latitude: (selectedGame?.questions[index + 1].coordinates.x)!, longitude: (selectedGame?.questions[index + 1].coordinates.y)!)
                 totalDistance += toLocation.distance(from: startLocation)
-                print(totalDistance)
             }
             totalDistance = totalDistance/1000
             let roundedDistance = String(format: "%.2f", totalDistance)
+            selectedGame?.length = String(totalDistance)
             lengthLabel.text = "Total distance: \(roundedDistance)km"
         }
     }
@@ -95,23 +97,21 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         
         questionsLabel.text = "Questions:"
-        lengthLabel.text = "Distance"
+        lengthLabel.text = "Total distance:"
         selectedGame = nil
+        mapView.deselectAnnotation(view.annotation, animated: true)
     }
     
     
     @IBAction func onStartButton(_ sender: Any) {
-        if selectedGame != nil{
+        let nameLength = nameInput.text?.characters.count
+        if selectedGame != nil && nameLength! > 2 && nameLength! < 15{
             performSegue(withIdentifier: "segueToGame", sender: self)
         } else {
             //Do something, maybe a warning
         }
     }
     
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let segueSender = segue.destination as! GameViewController
         segueSender.playerName = nameInput.text
@@ -122,8 +122,9 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
 }
 
 class customMKannotation: MKPointAnnotation{
-    let id : Float
-    init(id: Float){
+    let id : Int
+    var questionAnswered = false
+    init(id: Int){
         self.id = id
     }
     
