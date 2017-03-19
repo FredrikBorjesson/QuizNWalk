@@ -424,65 +424,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quizname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAx-cr-6ux">
-                                <rect key="frame" x="16" y="99" width="343" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="HHp-cs-OMT"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quizname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAx-cr-6ux">
+                                <rect key="frame" x="16" y="28" width="343" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total distance:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwQ-eq-Uov">
-                                <rect key="frame" x="18.5" y="266" width="337.5" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="vmF-qQ-n5z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Correct answers:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6d-n5-0n0">
-                                <rect key="frame" x="51" y="183" width="273" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="EdQ-mP-HXe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99a-CI-7hk">
-                                <rect key="frame" x="90" y="538" width="195" height="52"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="99a-CI-7hk">
+                                <rect key="frame" x="90" y="595" width="195" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="RkH-oF-N34"/>
-                                    <constraint firstAttribute="height" constant="52" id="aH2-AP-fZG"/>
-                                </constraints>
                                 <state key="normal" title="To menu"/>
                                 <connections>
                                     <action selector="onToMenuButton:" destination="QTB-ow-8kl" eventType="touchUpInside" id="fDe-kJ-6Nv"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1ka-9X-1AH">
+                                <rect key="frame" x="16" y="162" width="343" height="425"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="PhD-kT-pTZ" customClass="CustomCell" customModule="QuizNWalk" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhD-kT-pTZ" id="1oC-b8-IIA">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jI-ee-xBW">
+                                                    <rect key="frame" x="8" y="8" width="146" height="27"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Correct answers:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86e-ZV-Abu">
+                                                    <rect key="frame" x="162" y="8" width="173" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="correctAnswers" destination="86e-ZV-Abu" id="ClF-17-z70"/>
+                                            <outlet property="name" destination="9jI-ee-xBW" id="j0h-Qh-yvd"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total distance:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwQ-eq-Uov">
+                                <rect key="frame" x="21" y="96" width="337.5" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1647058824" green="0.58823529409999997" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="jAx-cr-6ux" firstAttribute="top" secondItem="qBM-EH-fL7" secondAttribute="bottom" constant="79" id="2bo-6f-PSm"/>
-                            <constraint firstItem="VwQ-eq-Uov" firstAttribute="centerX" secondItem="bcr-9Y-osg" secondAttribute="centerX" id="4nV-mP-joY"/>
-                            <constraint firstItem="99a-CI-7hk" firstAttribute="centerX" secondItem="bcr-9Y-osg" secondAttribute="centerX" id="9RR-Dv-PNd"/>
-                            <constraint firstItem="jAx-cr-6ux" firstAttribute="width" secondItem="bcr-9Y-osg" secondAttribute="width" multiplier="0.9" id="DkT-MZ-2VC"/>
-                            <constraint firstItem="N6d-n5-0n0" firstAttribute="width" secondItem="jAx-cr-6ux" secondAttribute="width" id="SkU-KN-8mo"/>
-                            <constraint firstItem="VwQ-eq-Uov" firstAttribute="top" secondItem="N6d-n5-0n0" secondAttribute="bottom" constant="31" id="V6u-pl-jF3"/>
-                            <constraint firstItem="jAx-cr-6ux" firstAttribute="centerX" secondItem="bcr-9Y-osg" secondAttribute="centerX" id="VFA-TG-UqH"/>
-                            <constraint firstItem="VwQ-eq-Uov" firstAttribute="width" secondItem="N6d-n5-0n0" secondAttribute="width" id="cHJ-5M-75p"/>
-                            <constraint firstItem="N6d-n5-0n0" firstAttribute="top" secondItem="jAx-cr-6ux" secondAttribute="bottom" constant="24" id="r0q-Vb-rlR"/>
-                            <constraint firstItem="8tY-vs-uhV" firstAttribute="top" secondItem="99a-CI-7hk" secondAttribute="bottom" constant="77" id="sCg-aR-gfX"/>
-                            <constraint firstItem="N6d-n5-0n0" firstAttribute="centerX" secondItem="bcr-9Y-osg" secondAttribute="centerX" id="yiv-Lh-IRq"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="correctAnswersLabel" destination="N6d-n5-0n0" id="NZB-Sm-Jre"/>
                         <outlet property="lengthTravelLabel" destination="VwQ-eq-Uov" id="cpA-cQ-mMh"/>
                         <outlet property="quizNameLabel" destination="jAx-cr-6ux" id="VAR-Oe-wOe"/>
+                        <outlet property="tableView" destination="1ka-9X-1AH" id="j7K-7V-irP"/>
                         <outlet property="toMenuButton" destination="99a-CI-7hk" id="Ybv-ca-cXD"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueToMenuFromEnd" id="GUn-hI-kK6"/>
                     </connections>
@@ -510,8 +516,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfU-1T-Udg">
-                                <rect key="frame" x="96" y="551" width="185" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfU-1T-Udg">
+                                <rect key="frame" x="105" y="551" width="185" height="48"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="736-XC-iNZ"/>

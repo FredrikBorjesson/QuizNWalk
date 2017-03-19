@@ -82,18 +82,23 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         } else {
             sender.backgroundColor = UIColor.red
         }
-        updateCurrentQuestion()
-        if currentGame!.questionNr == currentGame.questions.count - 1{
+        nextQuestion()
+    }
+    
+    func nextQuestion(){
+        if currentGame!.questionNr == currentGame.questions.count {
             stopMonitoringRegions()
-             performSegue(withIdentifier: "fromQuestionToEndGame", sender: self)
+            performSegue(withIdentifier: "fromQuestionToEndGame", sender: self)
+        } else {
+            updateCurrentQuestion()
+            disableButtons()
+            getQuestionButtonHide()
+            startMontitoringQuestion()
+            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(switchView), userInfo: nil, repeats: false)
+            inRegion = false
+            print(currentGame.questionNr)
         }
-        disableButtons()
-        getQuestionButtonHide()
-        startMontitoringQuestion()
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(switchView), userInfo: nil, repeats: false)
-        inRegion = false
-        print(currentGame.questionNr)
-        
+
     }
     
     @IBAction func onGetQuestionButton(_ sender: Any) {
@@ -107,8 +112,6 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         }
     }
     
-    
-    
     func setQuestionAndAnswers(){
         questionLabel.text = currentGame!.questions[currentGame!.questionNr - 1].question
         let answersArray = [currentGame!.questions[currentGame!.questionNr - 1].correctAnswer,
@@ -116,10 +119,10 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
                             currentGame!.questions[currentGame!.questionNr - 1].wrongAnswer2,
                             currentGame!.questions[currentGame!.questionNr - 1].wrongAnswer3]
         let randomAnswersArray = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: answersArray)
-        answer1Button.setTitle(randomAnswersArray[0] as! String, for: .normal)
-        answer2Button.setTitle(randomAnswersArray[1] as! String, for: .normal)
-        answer3Button.setTitle(randomAnswersArray[2] as! String, for: .normal)
-        answer4Button.setTitle(randomAnswersArray[3] as! String, for: .normal)
+        answer1Button.setTitle(randomAnswersArray[0] as? String, for: .normal)
+        answer2Button.setTitle(randomAnswersArray[1] as? String, for: .normal)
+        answer3Button.setTitle(randomAnswersArray[2] as? String, for: .normal)
+        answer4Button.setTitle(randomAnswersArray[3] as? String, for: .normal)
     }
     
     func updateCurrentQuestion(){
@@ -127,7 +130,6 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.removeAnnotation(annotation)
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
         mapView.addAnnotation(annotationView.annotation!)
-        print("\(mapView.annotations.count) antal annotations efter remove")
         currentGame!.questionNr += 1
         currentQuestion.text = "Question: \(currentGame!.questionNr)/\(currentGame!.questions.count)"
         
@@ -144,7 +146,7 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             timerLabel.text = "Time left: \(time)"
         } else {
             timer.invalidate()
-            switchView()
+            nextQuestion()
         }
     }
     
@@ -244,19 +246,20 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
        
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-        annotationView.canShowCallout = true
-        annotationView.annotation = annotation
         if let annotation = annotation as? customMKannotation{
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+            annotationView.canShowCallout = true
+            annotationView.annotation = annotation
             if annotation.id < currentGame.questionNr{
                 annotationView.image = #imageLiteral(resourceName: "questionGray")
             } else {
                 annotationView.image = #imageLiteral(resourceName: "questionGreen")
             }
+            return annotationView
         }
-        
-        return annotationView
-  }
+        return nil
+    }
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
@@ -272,6 +275,8 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     func displayNotification(){
         let content = UNMutableNotificationContent()
         content.title = "You're at the question!"
+        content.body = ""   //Only seem to work if these are set
+        content.subtitle = "" // This too
         content.badge = 1
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)

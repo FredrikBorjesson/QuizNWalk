@@ -20,7 +20,6 @@ class Game{
     var correctAnswers = 0
     var length : String = ""
     
-    
     init(quizName: String, id: Int) {
         self.quizName = quizName
         self.id = id

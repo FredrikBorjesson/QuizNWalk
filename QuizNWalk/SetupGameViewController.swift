@@ -38,26 +38,19 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
         allGames = getGames()
         showGamesAnnotations()
         startButton.layer.cornerRadius = 6
-        
+        backButton.layer.cornerRadius = 6
         warningLabel.layer.cornerRadius = 5
-        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {
         startBool = false
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     @IBAction func onBackButton(_ sender: Any) {
         performSegue(withIdentifier: "segueToMenufromSetup", sender: self)
     }
     
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //print(locations)
         if let location = locations.last{
             let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
             let lookHereRegion = MKCoordinateRegion(center: location.coordinate, span: span)
@@ -78,16 +71,19 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let identifier = "quiz"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-        } else {
-            annotationView?.annotation = annotation
+        if let quizAnnotation = annotation as? customMKannotation{
+            let identifier = "quiz"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: quizAnnotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+            } else {
+                annotationView?.annotation = quizAnnotation
+            }
+            annotationView?.image = #imageLiteral(resourceName: "chooseQuiz")
+            return annotationView
         }
-        annotationView?.image = #imageLiteral(resourceName: "chooseQuiz")
-        return annotationView
+        return nil
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -102,13 +98,12 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
             }
             totalDistance = totalDistance/1000
             let roundedDistance = String(format: "%.2f", totalDistance)
-            selectedGame?.length = String(totalDistance)
+            selectedGame?.length = roundedDistance
             lengthLabel.text = "Total distance: \(roundedDistance)km"
         }
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        
         questionsLabel.text = "Questions:"
         lengthLabel.text = "Total distance:"
         selectedGame = nil
@@ -144,8 +139,6 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
             })
         })
     }
-    
-
 }
 
 class customMKannotation: MKPointAnnotation{

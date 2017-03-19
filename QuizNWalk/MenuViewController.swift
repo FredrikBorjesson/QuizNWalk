@@ -37,11 +37,10 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
 
     
     @IBAction func validateGPS(_ sender: UIButton) {
-        print(CLLocationManager.authorizationStatus())
         if CLLocationManager.locationServicesEnabled(){
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined, .restricted, .denied:
-                print("Noooo")
+                print("GPS does not work")
             case .authorizedAlways, .authorizedWhenInUse:
                 if sender.currentTitle == "Play"{
                     performSegue(withIdentifier: "segueToSetupGame", sender: self)
