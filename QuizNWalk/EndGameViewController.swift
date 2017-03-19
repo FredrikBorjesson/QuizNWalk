@@ -13,12 +13,14 @@ class EndGameViewController: UIViewController {
     @IBOutlet weak var quizNameLabel: UILabel!
     @IBOutlet weak var correctAnswersLabel: UILabel!
     @IBOutlet weak var lengthTravelLabel: UILabel!
+    @IBOutlet weak var toMenuButton: UIButton!
     
     var currentGame : Game!
     var playerName : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toMenuButton.layer.cornerRadius = 6
         quizNameLabel.text = currentGame.quizName
         correctAnswersLabel.text = "Correct answers: \(currentGame.correctAnswers)"
         lengthTravelLabel.text = "Total distance: \(currentGame.length)km"
@@ -29,6 +31,11 @@ class EndGameViewController: UIViewController {
 //        controllers?.remove(at: controllers!.count - 1)
 //        navigationController?.viewControllers = controllers!
     }
+    
+    @IBAction func onToMenuButton(_ sender: Any) {
+        performSegue(withIdentifier: "segueToMenuFromEnd", sender: self)
+    }
+    
 
     /*
     // MARK: - Navigation

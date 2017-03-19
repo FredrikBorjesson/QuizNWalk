@@ -17,11 +17,14 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     @IBOutlet weak var lengthLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var warningLabel: UILabel!
     
     var locationManager : CLLocationManager!
     var allGames : [Game]?
     var selectedGame : Game?
     var gamesStartLocations : [MKPointAnnotation] = []
+    var startBool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +38,23 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
         allGames = getGames()
         showGamesAnnotations()
         startButton.layer.cornerRadius = 6
+        
+        warningLabel.layer.cornerRadius = 5
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        startBool = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func onBackButton(_ sender: Any) {
+        performSegue(withIdentifier: "segueToMenufromSetup", sender: self)
+    }
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //print(locations)
@@ -106,16 +119,30 @@ class SetupGameViewController: UIViewController, CLLocationManagerDelegate, MKMa
     @IBAction func onStartButton(_ sender: Any) {
         let nameLength = nameInput.text?.characters.count
         if selectedGame != nil && nameLength! > 2 && nameLength! < 15{
+            startBool = true
             performSegue(withIdentifier: "segueToGame", sender: self)
         } else {
-            //Do something, maybe a warning
+            animateWarning()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let segueSender = segue.destination as! GameViewController
-        segueSender.playerName = nameInput.text
-        segueSender.currentGame = selectedGame
+        if startBool{
+            let segueSender = segue.destination as! GameViewController
+            segueSender.playerName = nameInput.text
+            segueSender.currentGame = selectedGame
+        }
+    }
+    
+    func animateWarning(){
+        UIView.animate(withDuration: 1, animations: {
+            self.warningLabel.alpha = 1
+        })
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: {(Timer) in
+            UIView.animate(withDuration: 2, animations: {
+                self.warningLabel.alpha = 0
+            })
+        })
     }
     
 

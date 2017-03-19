@@ -69,7 +69,8 @@ class GameViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.refre
+        stopMonitoringRegions()
+        getQuestionButtonShow()
     }
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {

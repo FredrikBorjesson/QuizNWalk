@@ -10,17 +10,20 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        backButton.layer.cornerRadius = 6
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func onBackButton(_ sender: Any) {
+        performSegue(withIdentifier: "segueToMenuFromAbout", sender: self)
     }
-    
+        
 
     /*
     // MARK: - Navigation

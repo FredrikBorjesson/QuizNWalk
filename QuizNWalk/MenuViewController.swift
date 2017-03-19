@@ -14,7 +14,6 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
 
     var locationManager : CLLocationManager!
     @IBOutlet weak var playButton: UIButton!
-    @IBOutlet weak var highscoreButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
     
     
@@ -30,7 +29,6 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
         })
         
         playButton.layer.cornerRadius = 6
-        highscoreButton.layer.cornerRadius = 6
         aboutButton.layer.cornerRadius = 6
         
         // Do any additional setup after loading the view.
@@ -47,10 +45,8 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
             case .authorizedAlways, .authorizedWhenInUse:
                 if sender.currentTitle == "Play"{
                     performSegue(withIdentifier: "segueToSetupGame", sender: self)
-                } else if sender.currentTitle == "HighScore"{
-                    performSegue(withIdentifier: "segueToHighscore", sender: self)
-                } else {
-                    performSegue(withIdentifier: "a", sender: self)
+                }  else {
+                    performSegue(withIdentifier: "segueToAbout", sender: self)
                 }
             }
         }
