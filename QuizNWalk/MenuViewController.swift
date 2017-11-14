@@ -16,8 +16,6 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,8 +32,6 @@ class MenuViewController: UIViewController, CLLocationManagerDelegate{
         // Do any additional setup after loading the view.
     }
 
-
-    
     @IBAction func validateGPS(_ sender: UIButton) {
         if CLLocationManager.locationServicesEnabled(){
             switch CLLocationManager.authorizationStatus() {

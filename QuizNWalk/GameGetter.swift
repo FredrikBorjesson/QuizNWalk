@@ -12,6 +12,7 @@ import Foundation
 // For now only one exists.
 
 func getGames() -> [Game]{
+    
     let demoGame = Game(quizName: "Fredrik's Cool Quiz", id: 1)
     demoGame.questions.append(Question("Hur många kromosom par har vi i våra celler?", "23", "64", "42", "15", (51.509979999999999, -0.13370000000000001)))
     demoGame.questions.append(Question("Namnet Ran förekommer i nordisk mytologi. Vad var Ran för något?", "En gudinna", "Ett troll", "En människa", "En gud", (-26.204102800000001 ,28.047305099999999)))

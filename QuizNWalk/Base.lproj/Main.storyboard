@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Smq-JY-CHt">
-                                <rect key="frame" x="19" y="167" width="337.5" height="333.5"/>
+                                <rect key="frame" x="0.5" y="167" width="375" height="333.5"/>
                                 <gestureRecognizers/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Distance:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="por-Oh-sFe">
@@ -105,7 +105,7 @@
                             <constraint firstItem="QSL-wr-28e" firstAttribute="height" secondItem="Mao-M4-35r" secondAttribute="height" id="0IR-yU-X1P"/>
                             <constraint firstItem="Faj-wm-vHP" firstAttribute="bottom" secondItem="Smq-JY-CHt" secondAttribute="top" constant="-8" id="0YK-PU-IoN"/>
                             <constraint firstItem="Smq-JY-CHt" firstAttribute="height" secondItem="ipr-M0-6zL" secondAttribute="height" multiplier="0.5" id="181-Vd-JcJ"/>
-                            <constraint firstItem="Smq-JY-CHt" firstAttribute="width" secondItem="ipr-M0-6zL" secondAttribute="width" multiplier="0.9" id="3ER-5b-yC1"/>
+                            <constraint firstItem="Smq-JY-CHt" firstAttribute="width" secondItem="ipr-M0-6zL" secondAttribute="width" id="3ER-5b-yC1"/>
                             <constraint firstItem="Mao-M4-35r" firstAttribute="width" secondItem="ipr-M0-6zL" secondAttribute="width" multiplier="0.45" id="3dw-KZ-sqN"/>
                             <constraint firstItem="QSL-wr-28e" firstAttribute="centerY" secondItem="Mao-M4-35r" secondAttribute="centerY" id="4k8-8f-msW"/>
                             <constraint firstItem="ycd-bM-lGd" firstAttribute="leading" secondItem="ipr-M0-6zL" secondAttribute="leadingMargin" constant="10" id="5Eg-Y8-IcK"/>
@@ -265,7 +265,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get to the next question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFN-5j-YZu">
-                                        <rect key="frame" x="19" y="508.5" width="337.5" height="39"/>
+                                        <rect key="frame" x="0.5" y="508.5" width="375" height="39"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="KUv-Dc-Scj"/>
                                         </constraints>
@@ -274,7 +274,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dCz-rr-z2g">
-                                        <rect key="frame" x="19" y="167" width="337.5" height="333.5"/>
+                                        <rect key="frame" x="0.5" y="167" width="375" height="333.5"/>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVV-vU-ldr">
                                         <rect key="frame" x="56" y="590" width="262.5" height="44"/>
@@ -304,7 +304,7 @@
                                     <constraint firstItem="aKR-tU-6G1" firstAttribute="top" secondItem="0fp-2E-DJh" secondAttribute="top" constant="65" id="5NE-xs-2eR"/>
                                     <constraint firstItem="dCz-rr-z2g" firstAttribute="centerX" secondItem="0fp-2E-DJh" secondAttribute="centerX" id="6Zo-zO-dK2"/>
                                     <constraint firstItem="aFN-5j-YZu" firstAttribute="centerX" secondItem="0fp-2E-DJh" secondAttribute="centerX" id="CQa-Jv-ZWx"/>
-                                    <constraint firstItem="dCz-rr-z2g" firstAttribute="width" secondItem="0fp-2E-DJh" secondAttribute="width" multiplier="0.9" id="DM7-j8-ktC"/>
+                                    <constraint firstItem="dCz-rr-z2g" firstAttribute="width" secondItem="0fp-2E-DJh" secondAttribute="width" id="DM7-j8-ktC"/>
                                     <constraint firstItem="KVV-vU-ldr" firstAttribute="centerX" secondItem="0fp-2E-DJh" secondAttribute="centerX" id="SD5-1O-1oC"/>
                                     <constraint firstItem="dCz-rr-z2g" firstAttribute="top" secondItem="Mu9-wU-woU" secondAttribute="bottom" constant="8" id="dbj-5w-IPd"/>
                                     <constraint firstItem="dCz-rr-z2g" firstAttribute="height" secondItem="0fp-2E-DJh" secondAttribute="height" multiplier="0.5" id="dkg-WM-eR1"/>
@@ -451,10 +451,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="PhD-kT-pTZ" customClass="CustomCell" customModule="QuizNWalk" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="337.5" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="337" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PhD-kT-pTZ" id="1oC-b8-IIA">
-                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="337" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jI-ee-xBW">
