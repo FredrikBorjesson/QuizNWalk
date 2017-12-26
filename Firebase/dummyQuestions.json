@@ -1,0 +1,86 @@
+{ 
+	"id": 111,
+	"questions" :
+	[
+	{
+	    "question": "Hur många kromosom par har vi i våra celler?",
+	    "correctAnswer": "23",
+	    "wrongAnswer1": "64",
+	    "wrongAnswer2": "42",
+	    "wrongAnswer3": "15",
+	    "coordinates": {"latitude": "51.509979999999999", "longitude": "-0.13370000000000001"}
+	},
+	{
+	    "question": "Namnet Ran förekommer i nordisk mytologi. Vad var Ran för något?",
+	    "correctAnswer": "En gudinna",
+	    "wrongAnswer1": "Ett troll",
+	    "wrongAnswer2": "En människa",
+	    "wrongAnswer3": "En gud",
+	    "coordinates": {"latitude": "-26.204102800000001", "longitude": "28.047305099999999"}
+	},
+	{
+	    "question": "Vilket träslag är glasspinnen gjord av?",
+	    "correctAnswer": "Bok",
+	    "wrongAnswer1": "Alm",
+	    "wrongAnswer2": "Björk",
+	    "wrongAnswer3": "Al",
+	    "coordinates": {"latitude": "55.755786000000001", "longitude": "37.617632999999998"}
+	},
+	{
+	    "question": "Viket år anföll Japan Pearl Harbour?",
+	    "correctAnswer": "1941",
+	    "wrongAnswer1": "1945",
+	    "wrongAnswer2": "1942",
+	    "wrongAnswer3": "1943",
+	    "coordinates": {"latitude": "19.017614699999999", "longitude": "72.856164399999997"}
+	},
+	{
+	    "question": "Vad betyder order demokrati?",
+	    "correctAnswer": "Folkstyre",
+	    "wrongAnswer1": "Rättvisa",
+	    "wrongAnswer2": "Folkbildning",
+	    "wrongAnswer3": "Orättvisa",
+	    "coordinates": {"latitude": "35.702069100000003", "longitude": "139.77532690000001"}
+	},
+	{
+	    "question": "Vad heter Nordkoreas nuvarande ledare?",
+	    "correctAnswer": "Kim Jong-un",
+	    "wrongAnswer1": "Tim Long Li",
+	    "wrongAnswer2": "Kim Peng",
+	    "wrongAnswer3": "Slim Shady",
+	    "coordinates": {"latitude": "-33.863399999999999", "longitude": "151.21100000000001"}
+	},
+	{
+	    "question": "Vem var formgivaren bakom den klassiska fåtöljen Ägget?",
+	    "correctAnswer": "Arne Jacobsen",
+	    "wrongAnswer1": "Marcello Siard",
+	    "wrongAnswer2": "Lena Larsson",
+	    "wrongAnswer3": "Carl Malmsten",
+	    "coordinates": {"latitude": "22.284680999999999", "longitude": "114.15817699999999"}
+	},
+	{
+	    "question": "Hur långt var fartyget Titanic?",
+	    "correctAnswer": "269m",
+	    "wrongAnswer1": "294m",
+	    "wrongAnswer2": "189m",
+	    "wrongAnswer3": "235m",
+	    "coordinates": {"latitude": "21.282777800000002", "longitude": "-157.8294444"}
+	},
+	{
+	    "question": "Vilken släkt kom Gustav Vasas mamma ifrån?",
+	    "correctAnswer": "Eka",
+	    "wrongAnswer1": "Sture",
+	    "wrongAnswer2": "Gren",
+	    "wrongAnswer3": "Sparre",
+	    "coordinates": {"latitude": "37.787358900000001", "longitude": "-122.408227"}
+	},
+	{
+	    "question": "Vilket år tillträde John F Kennedy som USAs president?",
+	    "correctAnswer": "1961",
+	    "wrongAnswer1": "1964",
+	    "wrongAnswer2": "1960",
+	    "wrongAnswer3": "1949",
+	    "coordinates": {"latitude": "19.435477800000001", "longitude": "-99.1364789"}
+	}
+	]
+}

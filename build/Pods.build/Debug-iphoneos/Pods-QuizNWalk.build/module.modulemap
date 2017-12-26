@@ -1,0 +1,6 @@
+framework module Pods_QuizNWalk {
+  umbrella header "Pods-QuizNWalk-umbrella.h"
+
+  export *
+  module * { export * }
+}

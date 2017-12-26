@@ -1,0 +1,1 @@
+In order to reset database. Run "node firebaseDefaultData.js"

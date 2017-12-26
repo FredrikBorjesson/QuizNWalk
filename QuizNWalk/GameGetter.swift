@@ -7,9 +7,27 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseFirestore
 
 // This function should get a JSON-object with all games. Will be created if I have the time.
 // For now only one exists.
+
+/*func getGames() -> [Game]{
+    let returnGame = Game(quizName: "Test", id: 2)
+    let db = Firestore.firestore()
+    db.collection("quizThumb").getDocuments() { (querySnapshot, err) in
+        if err != nil {
+            print("Error, kunde inte hämta")
+        } else {
+            for document in querySnapshot!.documents {
+                print("\(document.documentID) => \(document.data())")
+            }
+        }
+        
+    }
+    return [returnGame]
+}*/
 
 func getGames() -> [Game]{
     

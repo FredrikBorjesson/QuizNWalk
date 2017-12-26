@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AWA-8G-g3f">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="JSQ-B4-umN">
+            <objects>
+                <viewController id="AWA-8G-g3f" customClass="LoginViewController" customModule="QuizNWalk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rfC-50-m0f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kx9-Uf-6rc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="333.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Quiz'N'Walk logo" translatesAutoresizingMaskIntoConstraints="NO" id="bOK-4f-iBC">
+                                        <rect key="frame" x="36" y="130" width="303" height="88"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.54667474159999996" green="0.6759179381" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bOK-4f-iBC" firstAttribute="leading" secondItem="Kx9-Uf-6rc" secondAttribute="leading" constant="36" id="Cy8-vK-YjH"/>
+                                    <constraint firstItem="bOK-4f-iBC" firstAttribute="top" secondItem="Kx9-Uf-6rc" secondAttribute="top" constant="130" id="DMk-zk-1js"/>
+                                    <constraint firstAttribute="trailing" secondItem="bOK-4f-iBC" secondAttribute="trailing" constant="36" id="ht5-9o-5NI"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnB-wS-hPC">
+                                <rect key="frame" x="90" y="515" width="195" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MdO-h8-aW3"/>
+                                </constraints>
+                                <state key="normal" title="Logga in eller registrera"/>
+                                <connections>
+                                    <action selector="LoginRegisterPressed:" destination="AWA-8G-g3f" eventType="touchUpInside" id="tkI-ap-Frb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du måste logga in för att spela" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftu-31-YB0">
+                                <rect key="frame" x="0.0" y="383.5" width="375" height="24.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.54667474159999996" green="0.6759179381" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="S3s-he-iuR" firstAttribute="bottom" secondItem="DnB-wS-hPC" secondAttribute="bottom" constant="102" id="5Zv-8V-XPO"/>
+                            <constraint firstItem="Kx9-Uf-6rc" firstAttribute="top" secondItem="rfC-50-m0f" secondAttribute="top" id="NLN-IJ-Rla"/>
+                            <constraint firstItem="Ftu-31-YB0" firstAttribute="trailing" secondItem="S3s-he-iuR" secondAttribute="trailing" id="TAs-Ye-wE2"/>
+                            <constraint firstItem="Ftu-31-YB0" firstAttribute="top" secondItem="Kx9-Uf-6rc" secondAttribute="bottom" constant="50" id="X2t-RY-AjC"/>
+                            <constraint firstItem="Kx9-Uf-6rc" firstAttribute="height" secondItem="rfC-50-m0f" secondAttribute="height" multiplier="0.5" id="YeV-uM-cst"/>
+                            <constraint firstItem="Kx9-Uf-6rc" firstAttribute="trailing" secondItem="S3s-he-iuR" secondAttribute="trailing" id="ds9-uA-NPu"/>
+                            <constraint firstItem="Kx9-Uf-6rc" firstAttribute="leading" secondItem="rfC-50-m0f" secondAttribute="leading" id="eau-ge-3eq"/>
+                            <constraint firstItem="Ftu-31-YB0" firstAttribute="leading" secondItem="rfC-50-m0f" secondAttribute="leading" id="iyQ-zO-u8n"/>
+                            <constraint firstItem="S3s-he-iuR" firstAttribute="trailing" secondItem="DnB-wS-hPC" secondAttribute="trailing" constant="90" id="oLj-am-0rU"/>
+                            <constraint firstItem="DnB-wS-hPC" firstAttribute="leading" secondItem="S3s-he-iuR" secondAttribute="leading" constant="90" id="vcd-yd-6uh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="S3s-he-iuR"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginRegisterButton" destination="DnB-wS-hPC" id="7FM-ux-YH4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c1v-KR-JuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85.599999999999994" y="88.605697151424295"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Quiz'N'Walk logo" width="403" height="88"/>
+    </resources>
+</document>
